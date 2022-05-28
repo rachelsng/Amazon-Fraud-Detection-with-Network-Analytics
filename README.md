@@ -11,7 +11,7 @@ Given that these modern schemes are pulled off via real users (as opposed to aut
 ## Objective
 
 1. Predict which brands are engaging in ratings fraud
-2. Demonstrate the network metrics can help to improve prediction accuracy
+2. Demonstrate that network metrics can help to improve prediction accuracy
 
 ## Dataset
 
@@ -45,8 +45,6 @@ We hypothesize that nodes in dishonest brands will have many edges formed betwee
 
 For honest brands, it is hypothesized that users may just purchase and leave ratings for the few products that they need and hence edge formation should be much lower and mainly by chance.
 
-*Note that the cutoff of 3 months is highly arbitrary and a key improvement would be to test sensitivity of this analysis to different cutoffs.*
-
 See *3_Brand_Network_Extraction_From_Database.ipynb*, located in *1_Database_and_Network_Setup* for detailed steps.
 
 ## Exploratory Data Analysis Highlights
@@ -57,21 +55,43 @@ See *3_Brand_Network_Extraction_From_Database.ipynb*, located in *1_Database_and
 <img src="./images/std_rating_eda.png" alt="standard deviation of ratings" width="300"/>
 
 ### Network Features
-- 
 
-<img src="./images/network_metrics.png" alt="standard deviation of ratings" width="600"/>
+Various network features also differ between the good (label = 0, left) and bad (label = 1, right).
+
+- <b>Clustering</b>: Generally higher for bad brand
+- <b>Degree</b>: Generally higher for bad brand
+- <b>Largest Component</b>: Generally higher for bad brand, even when normalised by number of nodes (to control for brand popularity).
+
+<img src="./images/network_metrics.png" alt="network metrics differences" width="700"/>
 
 See *3_Network_Metrics_Computation_and_EDA.ipynb*.
 
 ## Results
 
-<b>XGBoost without Network Metrics</b>
-- ABC
+As we aim to explore the incremental impact of network features, only basic ML-model selection and tuning is done. The performance is then compared with and without network features.
 
-<b>XGBoost with Network Metrics</b>
-- ABC
+### XGBoost Classification Performance Improves with Network Features
+- <b>Without Network Features</b>: Precision of 62%, Recall of 59%, AUC of 0.67
+- <b>With Network Features</b>: Precision of 73% (+11%), Recall of 83% (+24%), AUC of 0.89 (+0.22)
 
-*Packages used: ABC, ABC*
+The resulting ROC-AUC performance difference is illustrated below: 
+
+<img src="./images/roc_auc_comparison.png" alt="roc auc" width="400"/>
+
+### Network Features Have High Importances
+
+The top 15 most important features according to SHAP values are shown below. It can be seen that 6 network features (<b>clustering, density, largest_component_norm, largest_component, degree</b> and <b>n_edges</b>) emerge as being important.
+
+Clustering is particularly helpful at a global level, where high values of clustering are associated with higher probability that the brand is engaging in fraud. 
+
+<img src="./images/shap_explanation.png" alt="shap values" width="400"/>
+
+See *2_Bad_Brand_Prediction*.
+
+## Closing Thoughts
+
+Overall, this analysis demonstrates that network metrics can be leveraged to better predict whether brands are engaging in review fraud or not, even as early as 2017 (almost 4 years in advance of when the brands were officially banned).
+
 
 ## Directory
 
