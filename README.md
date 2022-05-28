@@ -71,6 +71,9 @@ See *3_Network_Metrics_Computation_and_EDA.ipynb*.
 As we aim to explore the incremental impact of network features, only basic ML-model selection and tuning is done. The performance is then compared with and without network features.
 
 ### XGBoost Classification Performance Improves with Network Features
+
+Network features decisively improve the prediction outcomes when used in combination with various non-network features. 
+
 - <b>Without Network Features</b>: Precision of 62%, Recall of 59%, AUC of 0.67
 - <b>With Network Features</b>: Precision of 73% (+11%), Recall of 83% (+24%), AUC of 0.89 (+0.22)
 
