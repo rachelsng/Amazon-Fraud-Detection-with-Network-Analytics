@@ -55,11 +55,11 @@ future
 
 ## Directory
 
-- *1_Database_and_Network_Setup*: 
-- *2_Bad_Brand_Prediction*: 
-- *3_Network_Metrics_Computation_and_EDA.ipynb*:
+- *1_Database_and_Network_Setup*: Files to clean up raw data, create tables and views in Postgres database and psycopg2 notebook to query db for the nodelist and edgelist for each brand.
+- *2_Bad_Brand_Prediction*: Notebook to predict whether a brand is engaging in ratings fraud or not, as well as supporting precomputed network metrics by brand in csv form.
+- *3_Network_Metrics_Computation_and_EDA.ipynb*: Notebook to compute network metrics for each brand and do preliminary exploratory data analysis on differences in networks of good and bad brands.
 
-Source and intermediate csv files are quite large and not enclosed in this repository. Please refer to each respective folder for step-by-step instructions to generate data. 
+Source and intermediate csv files are quite large and not enclosed in this repository. Please refer to each respective folder for step-by-step instructions to generate data.
 
 ## Credits
 
